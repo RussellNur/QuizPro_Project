@@ -1,0 +1,22 @@
+-----------------
+RESULT
+-----------------
+Total score is: 1.0 out of 3
+-----------------
+SUMMARY
+-----------------
+
+Q1. The name of the very popular TV show? A. Game of Prawns B. Game of Bones C. Game of Thrones D. Game of Crowns
+Single Choice Question
+Correct answer: C. Your answer: A
+0.0/1 points earned.
+
+Q2. Dany's dragons are (or were) called ... A. Drogon B. Dracarys C. Viserion D. Rhaegal
+Multiple-Choice Question
+Correct answer(s): [A, C, D]. Your answer(s): B
+0.0/1 points earned.
+
+Q3. What is the name of Arya’s sword? A. Ice B. Pointy C. Fang D. Needle
+Single Choice Question
+Correct answer: D. Your answer: D
+1.0/1 points earned.
