@@ -6,7 +6,7 @@ import org.junit.*;
 
 import questions.SingleChoiceQuestion;
 
-public class getScoreTest {
+public class GetScoreSingleChoiceQuestionTest {
 	
 	@Test
 	public void test() {
