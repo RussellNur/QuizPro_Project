@@ -1,7 +1,7 @@
 -----------------
 RESULT
 -----------------
-Total score is: 2.0 out of 3
+Total score is: 1.0 out of 3
 -----------------
 SUMMARY
 -----------------
