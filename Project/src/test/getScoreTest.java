@@ -1,8 +1,10 @@
-package questions;
+package test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import questions.SingleChoiceQuestion;
 
 public class getScoreTest {
 
@@ -13,4 +15,5 @@ public class getScoreTest {
 		double output = test.getScore(userChoice);
 		assertEquals(1, output, 0.1);
 	}
+
 }
