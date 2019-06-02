@@ -3,14 +3,14 @@ package questions;
 import java.util.Scanner;
 
 /*
- * Abstract class Question
+ * Abstract generic class Question
  */
-public abstract class Question {
+public abstract class Question<T> {
 	
 	/*
-	 * Abstract method to calculate the score for the quiz (overridden in the subclasses)
+	 * Abstract generic method to calculate the score for the quiz (overridden in the subclasses)
 	 */
-	public abstract double getScore(String userChoice);
+	public abstract T getScore(String userChoice);
 	
 	/*
 	 * Abstract method to collect the summary for the quiz (overridden in the subclasses)

@@ -20,7 +20,7 @@ public class MultipleChoiceQuestion extends Question
 		question = q;
 		answer = ans;
 	}
-
+	
 	/*
 	 * Method askQuestion overrides the abstract method in Question class.
 	 * Prints the question 
@@ -34,7 +34,7 @@ public class MultipleChoiceQuestion extends Question
 	 * Method getScore overrides the abstract method in Question class.
 	 * Returns the value between 0 and 1 (depends on the number of correct/incorrect answers).
 	 */
-	public double getScore(String userChoice)
+	public Double getScore(String userChoice)
 	{
 		int counterCorrect = 0;
 		int counterWrong = 0;
@@ -43,7 +43,7 @@ public class MultipleChoiceQuestion extends Question
 		// Check if the user skipped the question. Return 0 if it's true.
 		if (skipQuestion(userChoice)) 
 		{
-			return 0;
+			return (double) 0;
 		}
 		
 		// Split the user's input by space and store it in the items array

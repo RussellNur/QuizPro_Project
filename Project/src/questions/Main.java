@@ -28,7 +28,7 @@ public class Main {
 				startAndGradeTheQuiz(nameOfTheQuiz);		
 			} 
 			
-			catch (emptyFileException ex) {
+			catch (EmptyFileException ex) {
 				System.out.println(ex.getMessage());
 				System.exit(0);
 				ex.printStackTrace();
@@ -88,6 +88,10 @@ public class Main {
 	    		   i++;
 	    	   }
 	    	   // For multiple choice question
+	    	   else if (arrayFromFile.get(j + 1).equals("OEQ")) {
+	    		   str.add(i, new OpenEndedQuestion(arrayFromFile.get(j), arrayFromFile.get(j + 1)));
+	    		   i++;
+	    	   }
 	    	   else {
 	    			ArrayList<String> q1 = new ArrayList<String>();
 	    			// Split the correct answers
@@ -112,8 +116,10 @@ public class Main {
 		double totalScore = 0; // totalScore for the quiz
 		// Summary String for the quiz
 		String summaryString = "\n-----------------\nSUMMARY\n-----------------\n";
+		String result = null;
 		// Used to mark the Question (Q) number in the summary (e.g. Q5)
 		int questionCounter = 1;
+		boolean needsGradingCondition = false;
 		ArrayList<Question> questionsArr = new ArrayList<>(); 
 		questionsArr = readFromFile(quizName);
 		for (Question elem : questionsArr)
@@ -150,15 +156,45 @@ public class Main {
 				// Increase questionCounter by 1
 				questionCounter++;
 			}
+			else if (elem != null && elem instanceof OpenEndedQuestion)
+			{
+				// ask the question
+				((OpenEndedQuestion)elem).askQuestion();
+				// Prompt user for the answer
+				String userChoice = elem.userAnswer();
+				// Add score for the question to the totalScore if the answer is blank or skipped
+				if (((OpenEndedQuestion)elem).getScore(userChoice).equals("No answer was given") || ((OpenEndedQuestion)elem).getScore(userChoice).equals("You skipped the question")) 
+				{
+					// Add summary for the question to the summaryString
+					summaryString = summaryString + "\nQ" + Integer.toString(questionCounter) +
+							". " + "0";
+					// Increase questionCounter by 1
+					questionCounter++;
+				}
+				else {
+					// Add summary for the question to the summaryString
+					summaryString = summaryString + "\nQ" + Integer.toString(questionCounter) +
+							". " + ((OpenEndedQuestion)elem).getSummary(userChoice);
+					// Increase questionCounter by 1
+					questionCounter++;
+					needsGradingCondition = true;
+				}
+
+			}
 			// Iterate through the questions in the quiz
 
 			// Print the result
-			String result =  ("-----------------\nRESULT\n-----------------\n" + "Total score is: " + totalScore + " out of " + questionsArr.size());
-			//System.out.println(result);
-			// Print the summary
-			//System.out.println(summaryString);
-			writeToFile(result, summaryString);
+			result =  ("-----------------\nRESULT\n-----------------\n" + "Total score is: " + totalScore + " out of " + questionsArr.size());
+			if (needsGradingCondition == true) { 
+				result += "\n!!!\nGrade might change due to the fact that some Open-Ended Questions need grading."; 
+			}
 		}
+		//System.out.println(result);
+		// Print the summary
+		//System.out.println(summaryString);
+		System.out.println(result);
+		System.out.println(summaryString);
+		writeToFile(result, summaryString);
 	}
 	
 	
@@ -166,7 +202,7 @@ public class Main {
 	 * greeting() method to greet the user, display all the available quizzes from 'quizzes.txt', 
 	 * and prompt the user to select the quiz by typing it (or exit)
 	 */
-	public static String greeting() throws FileNotFoundException, emptyFileException {
+	public static String greeting() throws FileNotFoundException, EmptyFileException {
 		System.out.println("\nWelcome to QuizPro!\nAvailable quizzes are: \n");
 		Scanner infile = new Scanner(new File("quizzes.txt")); // Open the file
 		// Check whether quizzes file is empty
@@ -174,7 +210,7 @@ public class Main {
 			if (quizzesFile.length() == 0) 
 			{
 				infile.close();
-				throw new emptyFileException("File '" + quizzesFile.getName() + "' is empty!\nAdd quizzes first, then restart the program.\nBye!");
+				throw new EmptyFileException("File '" + quizzesFile.getName() + "' is empty!\nAdd quizzes first, then restart the program.\nBye!");
 			}
 		// Display all the available quizzes
 		while (infile.hasNext())
