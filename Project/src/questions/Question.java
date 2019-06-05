@@ -5,7 +5,7 @@ import java.util.Scanner;
 /*
  * Abstract generic class Question
  */
-public abstract class Question<T> {
+public abstract class Question <T> {
 	
 	/*
 	 * Abstract generic method to calculate the score for the quiz (overridden in the subclasses)

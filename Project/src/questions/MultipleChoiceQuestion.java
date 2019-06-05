@@ -7,7 +7,7 @@ import java.util.List;
 /*
  * Concrete class MultipleChoiceQustion. Subclass of Question.
  */
-public class MultipleChoiceQuestion extends Question
+public class MultipleChoiceQuestion extends Question<Number>
 {
 	private String question;
 	private ArrayList<String> answer;
@@ -19,6 +19,10 @@ public class MultipleChoiceQuestion extends Question
 	{
 		question = q;
 		answer = ans;
+	}
+	
+	public String get() {
+		return("Question:\n" + question + "\nAnswer:\n" + answer);
 	}
 	
 	/*

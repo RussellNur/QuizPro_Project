@@ -4,8 +4,8 @@ package questions;
 /*
  * Concrete class OpenEndedQustion. Subclass of Question.
  */
-public class OpenEndedQuestion extends Question 
-{
+public class OpenEndedQuestion extends Question<String>
+	{
 	private String question;
 	private String answer;
 	
@@ -17,6 +17,10 @@ public class OpenEndedQuestion extends Question
 	{
 		question = q;
 		answer = ans;
+	}
+	
+	public String get() {
+		return("Question:\n" + question + "\nAnswer:\n" + answer);
 	}
 	
 	/*

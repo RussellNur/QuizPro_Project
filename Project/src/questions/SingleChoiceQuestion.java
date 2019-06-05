@@ -3,7 +3,7 @@ package questions;
 /*
  * Concrete class SingleChoiceQustion. Subclass of Question.
  */
-public class SingleChoiceQuestion extends Question
+public class SingleChoiceQuestion extends Question<Number>
 {
 	private String question;
 	private String answer;
@@ -16,7 +16,9 @@ public class SingleChoiceQuestion extends Question
 		question = q;
 		answer = ans;
 	}
-	
+	public String get() {
+		return("Question:\n" + question + "\nAnswer:\n" + answer);
+	}
 	/*
 	 * Method askQuestion overrides the abstract method in Question class.
 	 * Prints the question 
@@ -56,4 +58,5 @@ public class SingleChoiceQuestion extends Question
 		String summary = "";
 		return summary += question + "\nSingle Choice Question\n" + "Correct answer: " + answer + ". Your answer: " + userChoice + "\n" + getScore(userChoice) + "/1 points earned.\n";
 	}
+	
 }
