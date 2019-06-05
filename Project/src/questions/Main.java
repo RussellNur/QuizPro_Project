@@ -25,7 +25,11 @@ public class Main {
 			try {
 				// Greet the user and select the quiz
 				String nameOfTheQuiz = greeting();
-				startAndGradeTheQuiz(nameOfTheQuiz);		
+				if (!nameOfTheQuiz.equals("add.txt"))
+				{
+					startAndGradeTheQuiz(nameOfTheQuiz);	
+				}
+				else main(args);
 			} 
 			
 			catch (EmptyFileException ex) {
@@ -45,13 +49,13 @@ public class Main {
 	/*
 	 * writeToFile(String, String) method to write the result and the summary to the file
 	 */
-	public static void writeToFile(String result, String summary)
+	public static void writeToFile(String result, String summary, String fileName)
 	{
 		Formatter outfile = null;
 		
 		try
 		{
-			outfile = new Formatter("result.txt"); // open file
+			outfile = new Formatter(fileName); // open file
 		}
 		catch (FileNotFoundException ex)
 		{
@@ -61,7 +65,7 @@ public class Main {
 		outfile.format(result, null);
 		outfile.format(summary, null);
 		outfile.close();
-		System.out.println("The result is written to the file 'result.txt'. Thank you for taking the quiz!\n");
+		System.out.println("The result is written to the file "+ fileName + ". Thank you for your time!\n");
 	}
 	
 	
@@ -87,11 +91,12 @@ public class Main {
 	    		   str.add(i, new SingleChoiceQuestion(arrayFromFile.get(j), arrayFromFile.get(j + 1)));
 	    		   i++;
 	    	   }
-	    	   // For multiple choice question
+	    	   // For open ended question
 	    	   else if (arrayFromFile.get(j + 1).equals("OEQ")) {
 	    		   str.add(i, new OpenEndedQuestion(arrayFromFile.get(j), arrayFromFile.get(j + 1)));
 	    		   i++;
 	    	   }
+	    	   // For multiple choice question
 	    	   else {
 	    			ArrayList<String> q1 = new ArrayList<String>();
 	    			// Split the correct answers
@@ -194,7 +199,7 @@ public class Main {
 		//System.out.println(summaryString);
 		System.out.println(result);
 		System.out.println(summaryString);
-		writeToFile(result, summaryString);
+		writeToFile(result, summaryString, "result.txt");
 	}
 	
 	
@@ -218,15 +223,19 @@ public class Main {
 			System.out.println(infile.nextLine());
 		}
 		infile.close(); // Close the file
-		System.out.println("\nPlease type the quiz you'd like to try or type 'Exit' to exit:");
-		// Prompt user to type the quiz name or exit
+		System.out.println("\nPlease type the quiz you'd like to try \nOR\ntype 'Exit' to exit\nOR\nType Add to add your own quiz:");
+		// Prompt user to type the quiz name OR exit OR add the quiz
 		Scanner reader = new Scanner(System.in);
-		String quizChosen = reader.nextLine();
+		String quizChosen = reader.next();//
 		quizChosen = quizChosen.toLowerCase();
 		if (quizChosen.equals("exit"))
 		{
 			System.out.println("Thank you for using QuizPro!");
 			System.exit(0);
+		}
+		if (quizChosen.equals("add"))
+		{
+			GenericQuestion.addQuiz();
 		}
 		// Add the extension '.txt' to the file name
 		quizChosen += ".txt";

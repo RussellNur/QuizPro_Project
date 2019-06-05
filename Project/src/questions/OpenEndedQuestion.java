@@ -20,7 +20,7 @@ public class OpenEndedQuestion extends Question<String>
 	}
 	
 	public String get() {
-		return("Question:\n" + question + "\nAnswer:\n" + answer);
+		return("\nQuestion:\n" + question + "\nAnswer:\n" + answer);
 	}
 	
 	/*

@@ -22,7 +22,7 @@ public class MultipleChoiceQuestion extends Question<Number>
 	}
 	
 	public String get() {
-		return("Question:\n" + question + "\nAnswer:\n" + answer);
+		return("\nQuestion:\n" + question + "\nAnswer:\n" + answer);
 	}
 	
 	/*
