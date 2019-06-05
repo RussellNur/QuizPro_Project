@@ -9,25 +9,33 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
+/*
+ * Generic class Generic question which is bounded to be the subclass of the Question Class
+ */
 public class GenericQuestion <T extends Question>{
+	// Constructor includes variable question - which is the instance of the class Question or one of its subclasses
 	private T question;
 	
-	public void set(T question) 
+	public void set(T question) // Set method to set the question - which is an instance class
 	{ 
 		this.question = question; 
 	}
-	public T get() 
+	public T get() // Get method to return the question. 
 	{ 
 		return question; 
 	}
 
-
+/* 
+ * Main() method for demonstrative purposes to show that generics work and it is possible to create an instance of generic class and apply its methods
+ */
 public static void main(String[] args)
 	{
+		// Create an instance of the SingleChoiceQuestion
 		GenericQuestion<SingleChoiceQuestion> gSCQuestion = new GenericQuestion<SingleChoiceQuestion>();
 		gSCQuestion.set(new SingleChoiceQuestion("What's 2+2= ?\nA. 5, B. 7, C. 8, D. 4", "D"));
 		System.out.printf(gSCQuestion.get().get());
 		
+		// Create an instance of the MultipleChoiceQuestion
 		GenericQuestion<MultipleChoiceQuestion> gMCQuestion = new GenericQuestion<MultipleChoiceQuestion>();
 		ArrayList<String> q1 = new ArrayList<String>();
 		q1.add("A");
@@ -35,19 +43,25 @@ public static void main(String[] args)
 		gMCQuestion.set(new MultipleChoiceQuestion("What are the programming languages?\nA. Java, B. Manila, C. Python, D. Cobra", q1));
 		System.out.printf(gMCQuestion.get().get());
 		
+		// Create an instance of the OpenEndedQuestion
 		GenericQuestion<OpenEndedQuestion> gOEQuestion = new GenericQuestion<OpenEndedQuestion>();
-		gOEQuestion.set(new OpenEndedQuestion("How programming transformed your life", ""));
+		gOEQuestion.set(new OpenEndedQuestion("How programming transformed your life", "OEQ"));
 		System.out.printf(gOEQuestion.get().get());
 	}
 
+/*
+ * Add quiz allows to add the name of the quiz, populate it with questions and answers,
+ * and add its name to the list of available quizzes
+ */
 public static void addQuiz() 
 {
+	// Prompt the uset for the name of the quiz
 	System.out.println("Enter the name of the new quiz:");
 	Scanner reader = new Scanner(System.in);
 	String quizName = reader.nextLine();
 	quizName = quizName.toLowerCase();
 	try {
-	Formatter outfile = new Formatter(quizName + ".txt"); // open file
+	Formatter outfile = new Formatter(quizName + ".txt"); // open file with a quiz name
 	
 	while (true) 
 	{
