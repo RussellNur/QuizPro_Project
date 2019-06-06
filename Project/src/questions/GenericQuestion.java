@@ -25,30 +25,6 @@ public class GenericQuestion <T extends Question>{
 		return question; 
 	}
 
-/* 
- * Main() method for demonstrative purposes to show that generics work and it is possible to create an instance of generic class and apply its methods
- */
-public static void main(String[] args)
-	{
-		// Create an instance of the SingleChoiceQuestion
-		GenericQuestion<SingleChoiceQuestion> gSCQuestion = new GenericQuestion<SingleChoiceQuestion>();
-		gSCQuestion.set(new SingleChoiceQuestion("What's 2+2= ?\nA. 5, B. 7, C. 8, D. 4", "D"));
-		System.out.printf(gSCQuestion.get().get());
-		
-		// Create an instance of the MultipleChoiceQuestion
-		GenericQuestion<MultipleChoiceQuestion> gMCQuestion = new GenericQuestion<MultipleChoiceQuestion>();
-		ArrayList<String> q1 = new ArrayList<String>();
-		q1.add("A");
-		q1.add("D");
-		gMCQuestion.set(new MultipleChoiceQuestion("What are the programming languages?\nA. Java, B. Manila, C. Python, D. Cobra", q1));
-		System.out.printf(gMCQuestion.get().get());
-		
-		// Create an instance of the OpenEndedQuestion
-		GenericQuestion<OpenEndedQuestion> gOEQuestion = new GenericQuestion<OpenEndedQuestion>();
-		gOEQuestion.set(new OpenEndedQuestion("How programming transformed your life", "OEQ"));
-		System.out.printf(gOEQuestion.get().get());
-	}
-
 /*
  * Add quiz allows to add the name of the quiz, populate it with questions and answers,
  * and add its name to the list of available quizzes
@@ -78,7 +54,8 @@ public static void addQuiz()
 			outfile.format(question + "\n", null);
 			System.out.println("Enter the answer:");
 			String answer = reader.nextLine();
-			outfile.format(answer, null);
+			answer = answer.toUpperCase();
+			outfile.format(answer + "\n", null);
 			// Create new instance of the GenericQuestion, of type SingleChoiceQuestion
 			GenericQuestion<SingleChoiceQuestion> gSCQuestion = new GenericQuestion<SingleChoiceQuestion>();
 			// Use generic method set() to set question's question and answer
@@ -94,7 +71,8 @@ public static void addQuiz()
 			outfile.format(question + "\n", null);
 			System.out.println("Enter the answer(s) separated by space:");
 			String answer = reader.nextLine();
-			outfile.format(answer, null);
+			answer = answer.toUpperCase();
+			outfile.format(answer + "\n", null);
 			// Create new instance of the GenericQuestion, of type MultipleChoiceQuestion
 			GenericQuestion<MultipleChoiceQuestion> gMCQuestion = new GenericQuestion<MultipleChoiceQuestion>();
 			ArrayList<String> q1 = new ArrayList<String>();
@@ -115,7 +93,7 @@ public static void addQuiz()
 			System.out.println("Enter the question:");
 			String question = reader.nextLine();
 			outfile.format(question + "\n", null);
-			String answer = "OED";
+			String answer = "OEQ" + "\n";
 			outfile.format(answer, null);
 			// Create new instance of the GenericQuestion, of type OpenEndedQuestion
 			GenericQuestion<OpenEndedQuestion> gOEQuestion = new GenericQuestion<OpenEndedQuestion>();
