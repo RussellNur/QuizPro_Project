@@ -55,7 +55,7 @@ public static void main(String[] args)
  */
 public static void addQuiz() 
 {
-	// Prompt the uset for the name of the quiz
+	// Prompt the user for the name of the quiz
 	System.out.println("Enter the name of the new quiz:");
 	Scanner reader = new Scanner(System.in);
 	String quizName = reader.nextLine();
@@ -65,9 +65,12 @@ public static void addQuiz()
 	
 	while (true) 
 	{
+		// Prompt the user to enter the type of question to add or complete the quiz creation
 		System.out.println("\nWhat's the next question?\nSingle Choice Question - 1\nMultiple-Choice Question - 2\nOpen Ended Question - 3\n\nEnter 'done' to complete input");
 		String userChoice = reader.nextLine();
+		// done - to complete the quiz creation
 		if (userChoice.equals("done")) break;
+		// 1 - to add Single Choice Question
 		if (userChoice.equals("1"))
 		{
 			System.out.println("Enter the question:");
@@ -76,11 +79,14 @@ public static void addQuiz()
 			System.out.println("Enter the answer:");
 			String answer = reader.nextLine();
 			outfile.format(answer, null);
+			// Create new instance of the GenericQuestion, of type SingleChoiceQuestion
 			GenericQuestion<SingleChoiceQuestion> gSCQuestion = new GenericQuestion<SingleChoiceQuestion>();
+			// Use generic method set() to set question's question and answer
 			gSCQuestion.set(new SingleChoiceQuestion(question, answer));
+			// Use generic method get() to display the question
 			System.out.printf("Following question is added to the quiz:" + gSCQuestion.get().get());
 		}
-		
+		// 2 - to add Multiple-Choice Question
 		else if (userChoice.equals("2"))
 		{
 			System.out.println("Enter the question:");
@@ -89,6 +95,7 @@ public static void addQuiz()
 			System.out.println("Enter the answer(s) separated by space:");
 			String answer = reader.nextLine();
 			outfile.format(answer, null);
+			// Create new instance of the GenericQuestion, of type MultipleChoiceQuestion
 			GenericQuestion<MultipleChoiceQuestion> gMCQuestion = new GenericQuestion<MultipleChoiceQuestion>();
 			ArrayList<String> q1 = new ArrayList<String>();
 			// Split the correct answers
@@ -97,9 +104,12 @@ public static void addQuiz()
 			for (int k = 0; k <= splitted.length - 1; k++) {
 				q1.add(splitted[k]);
 			}
+			// Use generic method set() to set question's question and answer
 			gMCQuestion.set(new MultipleChoiceQuestion(question, q1));
+			// Use generic method get() to display the question
 			System.out.printf("Following question is added to the quiz:" + gMCQuestion.get().get());
 		}
+		// 3 - to add Open-Ended Question
 		else if (userChoice.equals("3"))
 		{
 			System.out.println("Enter the question:");
@@ -107,18 +117,24 @@ public static void addQuiz()
 			outfile.format(question + "\n", null);
 			String answer = "OED";
 			outfile.format(answer, null);
+			// Create new instance of the GenericQuestion, of type OpenEndedQuestion
 			GenericQuestion<OpenEndedQuestion> gOEQuestion = new GenericQuestion<OpenEndedQuestion>();
+			// Use generic method set() to set question's question and answer
 			gOEQuestion.set(new OpenEndedQuestion(question, answer));
+			// Use generic method get() to display the question
 			System.out.printf("Following question is added to the quiz:" + gOEQuestion.get().get());
 		}
 	}
-	outfile.close();
+	outfile.close(); // Close the file
 	}
 		
 	catch (FileNotFoundException ex)
 	{
 		System.err.println("Cannot open file ... quitting");
 	}
+	/*
+	 * Add quiz name to the list of available quizzes quizzes.txt
+	 */
 	try(FileWriter fw = new FileWriter("quizzes.txt", true);
 		    BufferedWriter bw = new BufferedWriter(fw);
 		    PrintWriter out = new PrintWriter(bw))
