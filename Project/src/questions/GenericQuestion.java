@@ -1,10 +1,16 @@
 package questions;
 
 import java.io.BufferedWriter;
+import java.io.EOFException;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
@@ -12,7 +18,7 @@ import java.util.Scanner;
 /*
  * Generic class Generic question which is bounded to be the subclass of the Question Class
  */
-public class GenericQuestion <T extends Question>{
+public class GenericQuestion <T extends Question> implements Serializable{
 	// Constructor includes variable question - which is the instance of the class Question or one of its subclasses
 	private T question;
 	
@@ -25,6 +31,9 @@ public class GenericQuestion <T extends Question>{
 		return question; 
 	}
 
+	
+	
+	
 /*
  * Add quiz allows to add the name of the quiz, populate it with questions and answers,
  * and add its name to the list of available quizzes
@@ -36,9 +45,18 @@ public static void addQuiz()
 	Scanner reader = new Scanner(System.in);
 	String quizName = reader.nextLine();
 	quizName = quizName.toLowerCase();
+	
+	final String BINARY_IO = "binary.dat";
+	
 	try {
 	Formatter outfile = new Formatter(quizName + ".txt"); // open file with a quiz name
-	
+		try (ObjectInputStream infile = new ObjectInputStream(new FileInputStream(BINARY_IO));)      
+		    {
+			try (ObjectOutputStream questionFile = new ObjectOutputStream
+	        		(new FileOutputStream(BINARY_IO));)  	
+	        {	
+       	
+		    
 	while (true) 
 	{
 		// Prompt the user to enter the type of question to add or complete the quiz creation
@@ -62,6 +80,9 @@ public static void addQuiz()
 			gSCQuestion.set(new SingleChoiceQuestion(question, answer));
 			// Use generic method get() to display the question
 			System.out.printf("Following question is added to the quiz:" + gSCQuestion.get().get());
+ 
+			questionFile.writeObject(gSCQuestion);  
+	        
 		}
 		// 2 - to add Multiple-Choice Question
 		else if (userChoice.equals("2"))
@@ -86,6 +107,10 @@ public static void addQuiz()
 			gMCQuestion.set(new MultipleChoiceQuestion(question, q1));
 			// Use generic method get() to display the question
 			System.out.printf("Following question is added to the quiz:" + gMCQuestion.get().get());
+			
+			questionFile.writeObject(gMCQuestion); 
+	        
+			
 		}
 		// 3 - to add Open-Ended Question
 		else if (userChoice.equals("3"))
@@ -101,15 +126,46 @@ public static void addQuiz()
 			gOEQuestion.set(new OpenEndedQuestion(question, answer));
 			// Use generic method get() to display the question
 			System.out.printf("Following question is added to the quiz:" + gOEQuestion.get().get());
+
+			questionFile.writeObject(gOEQuestion);  
+	        
 		}
 	}
 	outfile.close(); // Close the file
-	}
-		
-	catch (FileNotFoundException ex)
+	
+	System.out.println("The new quiz added consists of these questions:");
+	while (true)
 	{
-		System.err.println("Cannot open file ... quitting");
-	}
+		System.out.println((((GenericQuestion<? extends Question>) (infile.readObject())).get()));
+	} 
+}
+}
+	
+}
+	
+	catch (EOFException ex)
+    {
+        System.out.println("EOF reached in binary.dat");    
+    }
+	catch (FileNotFoundException ex)
+    {
+        System.out.println("FileNotFoundException"); 
+        ex.printStackTrace();   
+    }
+
+    catch (IOException ex)
+    {
+        System.out.println("IOException");
+        ex.printStackTrace();    
+    }
+	
+	catch (ClassNotFoundException ex)
+    {
+        System.out.println("ClassNotFoundException");
+        ex.printStackTrace();    
+    }
+
+	
 	/*
 	 * Add quiz name to the list of available quizzes quizzes.txt
 	 */
@@ -127,3 +183,4 @@ public static void addQuiz()
 	
 }
 }
+

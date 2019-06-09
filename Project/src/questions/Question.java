@@ -1,11 +1,12 @@
 package questions;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 /*
  * Abstract generic class Question
  */
-public abstract class Question <T> {
+public abstract class Question <T> implements Serializable{
 	
 	/*
 	 * Abstract generic method to calculate the score for the quiz (overridden in the subclasses)
@@ -21,6 +22,7 @@ public abstract class Question <T> {
 	 * Abstract void method to ask the question (overridden in the subclasses)
 	 */
 	public abstract void askQuestion();
+	
 	
 	/* 
 	 * Concrete method to skip the question

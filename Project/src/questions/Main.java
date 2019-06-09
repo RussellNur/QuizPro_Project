@@ -5,11 +5,14 @@ import java.util.Arrays;
 
 import java.util.Formatter;
 import java.io.FileNotFoundException;
-
+import java.io.FileOutputStream;
 import java.util.Scanner;
-
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Main {
 
@@ -19,6 +22,50 @@ public class Main {
 	 */
 	public static void main(String[] args)
 	{
+//		try {
+//			try (ObjectOutputStream outfile = new ObjectOutputStream(new     
+//	                FileOutputStream("binary.dat"));)       
+//				{
+//				SingleChoiceQuestion scq = new SingleChoiceQuestion("How are you?", "A");
+//				outfile.writeObject(scq);            
+//				}
+//			
+//			
+//			try (ObjectInputStream infile = new ObjectInputStream(new 
+//	                FileInputStream("binary.dat"));)       
+//				{
+//				while (true)
+//					{
+//					System.out.println(((SingleChoiceQuestion) (infile.readObject())).get());
+//					} 
+//				}
+//		}
+//		catch (EOFException ex)
+//	     {
+//	         System.out.println("EOF reached in binary_input.dat");    
+//	     }
+//		catch (FileNotFoundException ex)
+//	     {
+//	         System.out.println("FileNotFoundException"); 
+//	         ex.printStackTrace();   
+//	     }
+//
+//	     catch (IOException ex)
+//	     {
+//	         System.out.println("IOException");
+//	         ex.printStackTrace();    
+//	     }
+//
+//	     catch (ClassNotFoundException ex)
+//	     {
+//	         System.out.println("ClassNotFoundException");
+//	         ex.printStackTrace();    
+//	     }
+//		
+	
+
+		
+		
 		// Run the program in the loop
 		boolean running = true;
 		while (running == true){
