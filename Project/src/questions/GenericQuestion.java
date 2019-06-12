@@ -46,12 +46,12 @@ public static void addQuiz()
 	String quizName = reader.nextLine();
 	quizName = quizName.toLowerCase();
 	
-	final String BINARY_IO = "binary.dat";
+	final String BINARY_IO = quizName + ".dat";
 	
 	try {
 	Formatter outfile = new Formatter(quizName + ".txt"); // open file with a quiz name
-		try (ObjectInputStream infile = new ObjectInputStream(new FileInputStream(BINARY_IO));)      
-		    {
+		//try (ObjectInputStream infile = new ObjectInputStream(new FileInputStream(BINARY_IO));)      
+		  //  {
 			try (ObjectOutputStream questionFile = new ObjectOutputStream
 	        		(new FileOutputStream(BINARY_IO));)  	
 	        {	
@@ -133,13 +133,13 @@ public static void addQuiz()
 	}
 	outfile.close(); // Close the file
 	
-	System.out.println("The new quiz added consists of these questions:");
-	while (true)
-	{
-		System.out.println((((GenericQuestion<? extends Question>) (infile.readObject())).get()));
-	} 
+//	System.out.println("The new quiz added consists of these questions:");
+//	while (true)
+//	{
+//		System.out.println((((GenericQuestion<? extends Question>) (infile.readObject())).get()));
+//	} 
 }
-}
+//}
 	
 }
 	
@@ -159,11 +159,11 @@ public static void addQuiz()
         ex.printStackTrace();    
     }
 	
-	catch (ClassNotFoundException ex)
-    {
-        System.out.println("ClassNotFoundException");
-        ex.printStackTrace();    
-    }
+//	catch (ClassNotFoundException ex)
+//    {
+//        System.out.println("ClassNotFoundException");
+//        ex.printStackTrace();    
+//    }
 
 	
 	/*

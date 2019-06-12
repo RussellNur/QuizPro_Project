@@ -1,12 +1,24 @@
 -----------------
 RESULT
 -----------------
-Total score is: 1.0 out of 1
+Total score is: 1.9 out of 3
+!!!
+Grade might change due to the fact that some Open-Ended Questions need grading.
 -----------------
 SUMMARY
 -----------------
 
-Q1. How to say hello in Chinese? A. Nihao B. Hola C. Hello D. Konichiwa
+Q1. How many legs do spiders have? A. 2 B. 4 C. 6 D. 8
 Single Choice Question
-Correct answer: A. Your answer: A
+Correct answer: D. Your answer: D
 1/1 points earned.
+
+Q2. What do spiders eat? A. Flies B. Other spiders C. People D. Birds
+Multiple-Choice Question
+Correct answer(s): [A, B]. Your answer(s): A B D
+0.9/1 points earned.
+
+Q3. What are potential consequences of spider's bite?
+Open-Ended Question
+Your answer: DEPENDS ON THE SPIDER. IT MIGHT BE HARMLESS, AS WELL AS DEADLY.
+Awaits grading

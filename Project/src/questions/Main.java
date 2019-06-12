@@ -72,7 +72,7 @@ public class Main {
 			try {
 				// Greet the user and select the quiz
 				String nameOfTheQuiz = greeting();
-				if (!nameOfTheQuiz.equals("add.txt"))
+				if (!nameOfTheQuiz.equals("add.dat"))
 				{
 					startAndGradeTheQuiz(nameOfTheQuiz);	
 				}
@@ -123,44 +123,82 @@ public class Main {
 	 */
 	public static ArrayList<Question> readFromFile(String input) throws IOException
 	{
-	       Scanner infile = new Scanner(new File(input)); 
-	       ArrayList<String> arrayFromFile = new ArrayList<>();
+	       //Scanner infile = new Scanner(new File(input)); 
+	   //    ArrayList<String> arrayFromFile = new ArrayList<>();
 	       ArrayList<Question> str = new ArrayList<>();
-	       while (infile.hasNext())
-	       {    
-	    	   arrayFromFile.add(infile.nextLine());
-	       }
+	      // while (infile.hasNext())
+	    //   {    
+	    //	   arrayFromFile.add(infile.nextLine());
+	      // }
 	       int i = 0;
 	       // Iterate through the array
-	       for (int j = 0; j <= arrayFromFile.size() - 1; j = j + 2) {
-	    	   // For a single choice question
-	    	   if (arrayFromFile.get(j + 1).length() == 1) {
-	    		   str.add(i, new SingleChoiceQuestion(arrayFromFile.get(j), arrayFromFile.get(j + 1)));
-	    		   i++;
-	    	   }
-	    	   // For open ended question
-	    	   else if (arrayFromFile.get(j + 1).equals("OEQ")) {
-	    		   str.add(i, new OpenEndedQuestion(arrayFromFile.get(j), arrayFromFile.get(j + 1)));
-	    		   i++;
-	    	   }
-	    	   // For multiple choice question
-	    	   else {
-	    			ArrayList<String> q1 = new ArrayList<String>();
-	    			// Split the correct answers
-	    			String[] splitted = arrayFromFile.get(j + 1).split(" ");
-	    			// Add answers to q1
-	    			for (int k = 0; k <= splitted.length - 1; k++) {
-	    				q1.add(splitted[k]);
-	    			}
-	    		   str.add(i, new MultipleChoiceQuestion(arrayFromFile.get(j), q1));
-	    		   i++;
-	    	   }
-	       }
-	       infile.close();  // close the file
+	       //for (int j = 0; j <= arrayFromFile.size() - 1; j = j + 2) {
+	    	   
+	   		try (ObjectInputStream binaryInfile = new ObjectInputStream(new FileInputStream(input));)      
+		    {
+				while (true)
+				{
+					str.add((((GenericQuestion<? extends Question>) (binaryInfile.readObject())).get()));
+					//System.out.println((((GenericQuestion<? extends Question>) (binaryInfile.readObject())).get()));
+				} 	
+	        
+		    
+	    	   
+//	    	   // For a single choice question
+//	    	   if (arrayFromFile.get(j + 1).length() == 1) {
+//	    		   str.add(i, new SingleChoiceQuestion(arrayFromFile.get(j), arrayFromFile.get(j + 1)));
+//	    		   i++;
+//	    	   }
+//	    	   // For open ended question
+//	    	   else if (arrayFromFile.get(j + 1).equals("OEQ")) {
+//	    		   str.add(i, new OpenEndedQuestion(arrayFromFile.get(j), arrayFromFile.get(j + 1)));
+//	    		   i++;
+//	    	   }
+//	    	   // For multiple choice question
+//	    	   else {
+//	    			ArrayList<String> q1 = new ArrayList<String>();
+//	    			// Split the correct answers
+//	    			String[] splitted = arrayFromFile.get(j + 1).split(" ");
+//	    			// Add answers to q1
+//	    			for (int k = 0; k <= splitted.length - 1; k++) {
+//	    				q1.add(splitted[k]);
+//	    			}
+//	    		   str.add(i, new MultipleChoiceQuestion(arrayFromFile.get(j), q1));
+//	    		   i++;
+//	    	   }
+	    	   
+	    	   
+	    	   
+	       
+	       //infile.close();  // close the file
 	       // Return ArrayList of Question objects
-	       return str;
-	   }     
+
+	}
+	   
+	catch (EOFException ex)
+    {
+        System.out.println("EOF reached in binary.dat");    
+    }
+	catch (FileNotFoundException ex)
+    {
+        System.out.println("FileNotFoundException"); 
+        ex.printStackTrace();   
+    }
+
+    catch (IOException ex)
+    {
+        System.out.println("IOException");
+        ex.printStackTrace();    
+    }
 	
+	catch (ClassNotFoundException ex)
+    {
+        System.out.println("ClassNotFoundException");
+        ex.printStackTrace();    
+    }
+			return str;
+	}
+
 	/*
 	 * gradeTheQuiz() method to run the quiz and write the result and the summary to the output file "result.txt"
 	 */
@@ -284,8 +322,8 @@ public class Main {
 		{
 			GenericQuestion.addQuiz();
 		}
-		// Add the extension '.txt' to the file name
-		quizChosen += ".txt";
+		// Add the extension '.dat' to the file name
+		quizChosen += ".dat";
 		// Return the file name (of the quiz)
 		return quizChosen;
 	}

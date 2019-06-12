@@ -1,6 +1,0 @@
-SCQuestion
-A
-MCQuestion
-A B
-OEQuestion
-OEQ
