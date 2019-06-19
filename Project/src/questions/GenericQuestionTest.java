@@ -12,7 +12,7 @@ public class GenericQuestionTest {
 	 */
 	public void testGet() {
 		GenericQuestion<SingleChoiceQuestion> test = new GenericQuestion<SingleChoiceQuestion>();
-		test.set(new SingleChoiceQuestion("How are you? A. Great B. Terrible", "A"));
+		test.set(new SingleChoiceQuestion("How are you?"," A. Great B. Terrible", "A"));
 		SingleChoiceQuestion output = test.get();
 		assertEquals(output.getClass(), test.get().getClass());
 	}

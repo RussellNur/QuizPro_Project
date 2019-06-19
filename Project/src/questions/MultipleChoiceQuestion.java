@@ -11,18 +11,20 @@ public class MultipleChoiceQuestion extends Question<Number>
 {
 	private String question;
 	private ArrayList<String> answer;
+	private String options;
 	
 	/*
 	 * Constructor: question and answer are passed as arguments
 	 */
-	public MultipleChoiceQuestion(String q, ArrayList<String> ans)
+	public MultipleChoiceQuestion(String q, String opt, ArrayList<String> ans)
 	{
 		question = q;
 		answer = ans;
+		options = opt;
 	}
 	
 	public String get() {
-		return("\nQuestion:\n" + question + "\nAnswer:\n" + answer);
+		return("\nQuestion:\n" + question + "\noptions\n" + options  + "\nAnswer:\n" + answer);
 	}
 	
 	/*
@@ -31,7 +33,7 @@ public class MultipleChoiceQuestion extends Question<Number>
 	 */
 	public void askQuestion()
 	{
-		System.out.println(question + "\nChoose all the options that apply (In the following format: A B C). Your answer: ");
+		System.out.println(question + options + "\nChoose all the options that apply (In the following format: A B C). Your answer: ");
 	}
 	
 	/*
@@ -84,6 +86,6 @@ public class MultipleChoiceQuestion extends Question<Number>
 	public String getSummary(String userChoice)
 	{
 		String summary = "";
-		return summary += question + "\nMultiple-Choice Question\n" + "Correct answer(s): " + answer + ". Your answer(s): " + userChoice + "\n" + Double.toString(getScore(userChoice)) + "/1 points earned.\n";
+		return summary += question + options + "\nMultiple-Choice Question\n" + "Correct answer(s): " + answer + ". Your answer(s): " + userChoice + "\n" + Double.toString(getScore(userChoice)) + "/1 points earned.\n";
 	}
 }

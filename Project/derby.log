@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Jun 20 02:32:51 CST 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.1.3 - (1853019): instance a816c00e-016b-7103-52c7-000007321d18 
+on database directory /Users/RuslanNuriev/Documents/QuizPro_Project/Project/QuizTakers with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7d417077 
+Loaded from file:/Users/RuslanNuriev/Desktop/MET622/HW5/db-derby-10.15.1.3-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=11.0.1+13-LTS
+user.dir=/Users/RuslanNuriev/Documents/QuizPro_Project/Project
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.14.3
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

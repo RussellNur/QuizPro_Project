@@ -1,0 +1,6 @@
+What system is used in the US?
+B
+What's the weather going to be like tomorrow?
+A B
+What is the biggest challenge to predict weather?
+OEQ

@@ -1,3 +1,6 @@
+animals
+definitions
 spiders
-americanholidays
-gameofthrones
+weather
+java
+cows

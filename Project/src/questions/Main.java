@@ -7,6 +7,8 @@ import java.util.Formatter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Scanner;
+import java.util.stream.Stream;
+
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,53 +24,9 @@ public class Main {
 	 */
 	public static void main(String[] args)
 	{
-//		try {
-//			try (ObjectOutputStream outfile = new ObjectOutputStream(new     
-//	                FileOutputStream("binary.dat"));)       
-//				{
-//				SingleChoiceQuestion scq = new SingleChoiceQuestion("How are you?", "A");
-//				outfile.writeObject(scq);            
-//				}
-//			
-//			
-//			try (ObjectInputStream infile = new ObjectInputStream(new 
-//	                FileInputStream("binary.dat"));)       
-//				{
-//				while (true)
-//					{
-//					System.out.println(((SingleChoiceQuestion) (infile.readObject())).get());
-//					} 
-//				}
-//		}
-//		catch (EOFException ex)
-//	     {
-//	         System.out.println("EOF reached in binary_input.dat");    
-//	     }
-//		catch (FileNotFoundException ex)
-//	     {
-//	         System.out.println("FileNotFoundException"); 
-//	         ex.printStackTrace();   
-//	     }
-//
-//	     catch (IOException ex)
-//	     {
-//	         System.out.println("IOException");
-//	         ex.printStackTrace();    
-//	     }
-//
-//	     catch (ClassNotFoundException ex)
-//	     {
-//	         System.out.println("ClassNotFoundException");
-//	         ex.printStackTrace();    
-//	     }
-//		
 	
-
-		
-		
 		// Run the program in the loop
-		boolean running = true;
-		while (running == true){
+		while (true){
 			try {
 				// Greet the user and select the quiz
 				String nameOfTheQuiz = greeting();
@@ -117,67 +75,26 @@ public class Main {
 	
 	
 	/*
-	 * readFromFile() method to read data from the file
-	 * Questions are read either as a single choice question or as a multiple-choice question. 
-	 * Corresponding answers are read as well
+	 * readFromFile() method to read data as objects from the object file
+	 * Questions are read either as a single choice question, as a multiple-choice question, or as an open-ended question
 	 */
 	public static ArrayList<Question> readFromFile(String input) throws IOException
 	{
-	       //Scanner infile = new Scanner(new File(input)); 
-	   //    ArrayList<String> arrayFromFile = new ArrayList<>();
 	       ArrayList<Question> str = new ArrayList<>();
-	      // while (infile.hasNext())
-	    //   {    
-	    //	   arrayFromFile.add(infile.nextLine());
-	      // }
 	       int i = 0;
-	       // Iterate through the array
-	       //for (int j = 0; j <= arrayFromFile.size() - 1; j = j + 2) {
-	    	   
 	   		try (ObjectInputStream binaryInfile = new ObjectInputStream(new FileInputStream(input));)      
 		    {
 				while (true)
 				{
 					str.add((((GenericQuestion<? extends Question>) (binaryInfile.readObject())).get()));
-					//System.out.println((((GenericQuestion<? extends Question>) (binaryInfile.readObject())).get()));
+	
 				} 	
-	        
-		    
-	    	   
-//	    	   // For a single choice question
-//	    	   if (arrayFromFile.get(j + 1).length() == 1) {
-//	    		   str.add(i, new SingleChoiceQuestion(arrayFromFile.get(j), arrayFromFile.get(j + 1)));
-//	    		   i++;
-//	    	   }
-//	    	   // For open ended question
-//	    	   else if (arrayFromFile.get(j + 1).equals("OEQ")) {
-//	    		   str.add(i, new OpenEndedQuestion(arrayFromFile.get(j), arrayFromFile.get(j + 1)));
-//	    		   i++;
-//	    	   }
-//	    	   // For multiple choice question
-//	    	   else {
-//	    			ArrayList<String> q1 = new ArrayList<String>();
-//	    			// Split the correct answers
-//	    			String[] splitted = arrayFromFile.get(j + 1).split(" ");
-//	    			// Add answers to q1
-//	    			for (int k = 0; k <= splitted.length - 1; k++) {
-//	    				q1.add(splitted[k]);
-//	    			}
-//	    		   str.add(i, new MultipleChoiceQuestion(arrayFromFile.get(j), q1));
-//	    		   i++;
-//	    	   }
-	    	   
-	    	   
-	    	   
-	       
-	       //infile.close();  // close the file
-	       // Return ArrayList of Question objects
 
 	}
 	   
 	catch (EOFException ex)
     {
-        System.out.println("EOF reached in binary.dat");    
+        //System.out.println("EOF reached in binary.dat");    
     }
 	catch (FileNotFoundException ex)
     {
@@ -196,13 +113,25 @@ public class Main {
         System.out.println("ClassNotFoundException");
         ex.printStackTrace();    
     }
-			return str;
+	   		// Example of using streams and lambdas
+	   		// Create the stream of the questions in the quiz
+	   		Stream<Question> questionsStream = str.stream();
+	   		// Display the number of questions in the quiz
+	   		System.out.println("Number of questions in the selected quiz:  " + str.stream().count());
+	   		System.out.print("Question types in the selected quiz are: ");
+	   		System.out.println();
+	   		// Display the type of questions in the quiz
+	   		questionsStream.forEach(s -> System.out.println(s.getClass()));
+	        System.out.println();
+	        System.out.println("Good luck!\n");
+	
+	return str;
 	}
 
 	/*
 	 * gradeTheQuiz() method to run the quiz and write the result and the summary to the output file "result.txt"
 	 */
-	public static void startAndGradeTheQuiz(String quizName) throws IOException {
+	public static double startAndGradeTheQuiz(String quizName) throws IOException {
 		double totalScore = 0; // totalScore for the quiz
 		// Summary String for the quiz
 		String summaryString = "\n-----------------\nSUMMARY\n-----------------\n";
@@ -285,6 +214,7 @@ public class Main {
 		System.out.println(result);
 		System.out.println(summaryString);
 		writeToFile(result, summaryString, "result.txt");
+		return totalScore;
 	}
 	
 	
@@ -293,8 +223,39 @@ public class Main {
 	 * and prompt the user to select the quiz by typing it (or exit)
 	 */
 	public static String greeting() throws FileNotFoundException, EmptyFileException {
-		System.out.println("\nWelcome to QuizPro!\nAvailable quizzes are: \n");
+		System.out.println("\nWelcome to QuizPro!\n");//  \nAvailable quizzes are: \n");
+		System.out.println("Please enter your name:");
+		Scanner reader = new Scanner(System.in);
 		Scanner infile = new Scanner(new File("quizzes.txt")); // Open the file
+//		// Check whether quizzes file is empty
+//		File quizzesFile = new File("quizzes.txt");
+//			if (quizzesFile.length() == 0) 
+//			{
+//				infile.close();
+//				throw new EmptyFileException("File '" + quizzesFile.getName() + "' is empty!\nAdd quizzes first, then restart the program.\nBye!");
+//			}
+//		// Display all the available quizzes
+//		while (infile.hasNext())
+//		{
+//			System.out.println(infile.nextLine());
+//		}
+//		infile.close(); // Close the file
+		
+		//DatabaseAssignment.go(null);
+		
+//		System.out.println("\nPlease enter your name:");
+//		Scanner reader = new Scanner(System.in);
+		
+		String userName = reader.next(); // Record the user name
+		System.out.println("User's name is " + userName);
+		
+		String programmerBoolean = "";
+		System.out.println("Are you a programmer? (type 1 for 'yes and 0 for 'no')");
+		programmerBoolean = reader.next();
+		
+		
+		System.out.println("\nAvailable quizzes are:\n");
+		//
 		// Check whether quizzes file is empty
 		File quizzesFile = new File("quizzes.txt");
 			if (quizzesFile.length() == 0) 
@@ -303,31 +264,46 @@ public class Main {
 				throw new EmptyFileException("File '" + quizzesFile.getName() + "' is empty!\nAdd quizzes first, then restart the program.\nBye!");
 			}
 		// Display all the available quizzes
+		int quizNumber = 0;
+		ArrayList<String> quizN = new ArrayList();
+		String quizNam = "";
 		while (infile.hasNext())
 		{
-			System.out.println(infile.nextLine());
+			quizNumber++;
+			quizNam = infile.nextLine();
+			System.out.println(quizNumber + " " + quizNam);
+			quizN.add(quizNam);
 		}
 		infile.close(); // Close the file
-		System.out.println("\nPlease type the quiz you'd like to try \nOR\ntype 'Exit' to exit\nOR\nType Add to add your own quiz:");
+		//
+		System.out.println("\nPlease type the quiz number you'd like to try \nOR\ntype 'Exit' to exit\nOR\nType 'Add' to add your own quiz\nOR\nType 'LB' to open Leaderboard ('LBJAVA' for leaderboard on java quiz):");
 		// Prompt user to type the quiz name OR exit OR add the quiz
-		Scanner reader = new Scanner(System.in);
-		String quizChosen = reader.next();//
-		quizChosen = quizChosen.toLowerCase();
-		if (quizChosen.equals("exit"))
+//		Scanner reader = new Scanner(System.in);
+		String quizChosen = reader.next(); // Record the quiz number
+		if (quizChosen.toLowerCase().equals("exit"))
 		{
-			System.out.println("Thank you for using QuizPro!");
-			System.exit(0);
+			return "exit" + " " + "exit" + " " + "exit";
 		}
-		if (quizChosen.equals("add"))
+		else if (quizChosen.toLowerCase().equals("add"))
 		{
 			GenericQuestion.addQuiz();
+			return "add" + " " + "add" + " " + "add";
 		}
+		else if (quizChosen.toLowerCase().equals("lb"))
+		{
+			return "lb" + " " + "lb" + " " + "lb";
+		}
+		else if (quizChosen.toLowerCase().equals("lbjava"))
+		{
+			return "lbjava" + " " + "lbjava" + " " + "lbjava";
+		}
+		quizChosen = quizN.get(Integer.parseInt(quizChosen) - 1);
+		quizChosen = quizChosen.toLowerCase();
+		System.out.println("Chosen quiz is " + quizChosen);
+
 		// Add the extension '.dat' to the file name
 		quizChosen += ".dat";
 		// Return the file name (of the quiz)
-		return quizChosen;
+		return quizChosen + " " + userName + " " + programmerBoolean;
 	}
 }
-
-	
-

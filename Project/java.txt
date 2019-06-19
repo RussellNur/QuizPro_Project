@@ -1,0 +1,20 @@
+Primitive variables are stored on Stack.
+A
+What is the size of int variable?
+C
+What is the default value of int variable?
+A
+Which of the following is true about protected access modifier?
+B
+What is an Interface?
+C
+What is JIT compiler?
+A
+What is NullPointerException?
+A
+What is a transient variable?
+B
+Under what conditions is an object's finalize() method invoked by the garbage collector?
+A
+What is currentThread()?
+A

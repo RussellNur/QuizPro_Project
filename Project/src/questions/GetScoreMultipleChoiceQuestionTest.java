@@ -13,7 +13,7 @@ public class GetScoreMultipleChoiceQuestionTest {
 		ArrayList<String> q1 = new ArrayList<String>();
 		q1.add("A");
 		q1.add("B");
-		MultipleChoiceQuestion test = new MultipleChoiceQuestion("Question", q1);
+		MultipleChoiceQuestion test = new MultipleChoiceQuestion("Question", "options", q1);
 		String userChoice = "A B";
 		double output = test.getScore(userChoice);
 		assertEquals(1, output, 0);

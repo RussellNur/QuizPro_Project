@@ -1,24 +1,95 @@
 -----------------
 RESULT
 -----------------
-Total score is: 1.9 out of 3
-!!!
-Grade might change due to the fact that some Open-Ended Questions need grading.
+Total score is: 2.0 out of 10
 -----------------
 SUMMARY
 -----------------
 
-Q1. How many legs do spiders have? A. 2 B. 4 C. 6 D. 8
+Q1. Primitive variables are stored on Stack.
+A. True
+B. False
 Single Choice Question
-Correct answer: D. Your answer: D
+Correct answer: A. Your answer: C
+0/1 points earned.
+
+Q2. What is the size of int variable?
+A. 8 bit
+B. 16 bit
+C. 32 bit
+D. 64 bit
+Single Choice Question
+Correct answer: C. Your answer: C
 1/1 points earned.
 
-Q2. What do spiders eat? A. Flies B. Other spiders C. People D. Birds
-Multiple-Choice Question
-Correct answer(s): [A, B]. Your answer(s): A B D
-0.9/1 points earned.
+Q3. What is the default value of int variable?
+A. 0
+B. 0.0
+C. null
+D. not defined
+Single Choice Question
+Correct answer: A. Your answer: C
+0/1 points earned.
 
-Q3. What are potential consequences of spider's bite?
-Open-Ended Question
-Your answer: DEPENDS ON THE SPIDER. IT MIGHT BE HARMLESS, AS WELL AS DEADLY.
-Awaits grading
+Q4. Which of the following is true about protected access modifier?
+A. Variables, methods and constructors which are declared protected can be accessed by any class
+B. Variables, methods and constructors which are declared protected can be accessed by any class lying in same package
+C. Variables, methods and constructors which are declared protected in the superclass can be accessed only by its child class
+D. None of the above
+Single Choice Question
+Correct answer: B. Your answer: C
+0/1 points earned.
+
+Q5. What is an Interface?
+A. An interface is a collection of abstract methods
+B. Interface is an abstract class
+C. Interface is a concrete class
+D. None of the above
+Single Choice Question
+Correct answer: C. Your answer: C
+1/1 points earned.
+
+Q6. What is JIT compiler?
+A. Jit improves the runtime performance of computer programs based on bytecode
+B. JIT is an application development framework
+C. JIT is an implementations of the Java Virtual Machine which executes Java programs
+D. None of the above
+Single Choice Question
+Correct answer: A. Your answer: C
+0/1 points earned.
+
+Q7. What is NullPointerException?
+A. A <NullPointerException> is thrown when calling the instance method of a null object or modifying/accessing field of a null object
+B. A <NullPointerException> is thrown when object is set as null
+C. A <NullPointerException> is thrown when object property is set as null
+D. None of the above
+Single Choice Question
+Correct answer: A. Your answer: C
+0/1 points earned.
+
+Q8. What is a transient variable?
+A. A transient variable is a variable which is serialized during Serialization
+B. A transient variable is a variable that may not be serialized during Serialization
+C. A transient variable is a variable which is to be marked as serializable
+D. None of the above
+Single Choice Question
+Correct answer: B. Your answer: C
+0/1 points earned.
+
+Q9. Under what conditions is an object's finalize() method invoked by the garbage collector?
+A. When it detects that the object has become unreachable
+B. As soon as object is set as null
+C. At fixed intervalm it checks for null value
+D. None of the above
+Single Choice Question
+Correct answer: A. Your answer: C
+0/1 points earned.
+
+Q10. What is currentThread()?
+A. It is a Thread public static method used to obtain a reference to the current thread
+B. It is a thread's instance method used to get thread count
+C. It is a object's public static method used obtain a reference to the current thread
+D. It is a object's instance method used to get thread count
+Single Choice Question
+Correct answer: A. Your answer: C
+0/1 points earned.

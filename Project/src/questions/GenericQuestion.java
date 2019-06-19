@@ -50,8 +50,6 @@ public static void addQuiz()
 	
 	try {
 	Formatter outfile = new Formatter(quizName + ".txt"); // open file with a quiz name
-		//try (ObjectInputStream infile = new ObjectInputStream(new FileInputStream(BINARY_IO));)      
-		  //  {
 			try (ObjectOutputStream questionFile = new ObjectOutputStream
 	        		(new FileOutputStream(BINARY_IO));)  	
 	        {	
@@ -70,6 +68,15 @@ public static void addQuiz()
 			System.out.println("Enter the question:");
 			String question = reader.nextLine();
 			outfile.format(question + "\n", null);
+			System.out.println("How many options will be there?");
+			int numberOptions = Integer.parseInt(reader.nextLine());
+			System.out.println("Enter the options:");
+			String options = "";
+			int i = 1;
+			while (i <= numberOptions) {
+				options = options + "\n" + reader.nextLine();
+				i++;
+			}
 			System.out.println("Enter the answer:");
 			String answer = reader.nextLine();
 			answer = answer.toUpperCase();
@@ -77,7 +84,7 @@ public static void addQuiz()
 			// Create new instance of the GenericQuestion, of type SingleChoiceQuestion
 			GenericQuestion<SingleChoiceQuestion> gSCQuestion = new GenericQuestion<SingleChoiceQuestion>();
 			// Use generic method set() to set question's question and answer
-			gSCQuestion.set(new SingleChoiceQuestion(question, answer));
+			gSCQuestion.set(new SingleChoiceQuestion(question, options, answer));
 			// Use generic method get() to display the question
 			System.out.printf("Following question is added to the quiz:" + gSCQuestion.get().get());
  
@@ -90,6 +97,15 @@ public static void addQuiz()
 			System.out.println("Enter the question:");
 			String question = reader.nextLine();
 			outfile.format(question + "\n", null);
+			System.out.println("How many options will be there?");
+			int numberOptions = Integer.parseInt(reader.nextLine());
+			System.out.println("Enter the options:");
+			String options = "";
+			int i = 1;
+			while (i <= numberOptions) {
+				options = options + "\n" + reader.nextLine();
+				i++;
+			}
 			System.out.println("Enter the answer(s) separated by space:");
 			String answer = reader.nextLine();
 			answer = answer.toUpperCase();
@@ -104,7 +120,7 @@ public static void addQuiz()
 				q1.add(splitted[k]);
 			}
 			// Use generic method set() to set question's question and answer
-			gMCQuestion.set(new MultipleChoiceQuestion(question, q1));
+			gMCQuestion.set(new MultipleChoiceQuestion(question, options, q1));
 			// Use generic method get() to display the question
 			System.out.printf("Following question is added to the quiz:" + gMCQuestion.get().get());
 			
@@ -132,14 +148,8 @@ public static void addQuiz()
 		}
 	}
 	outfile.close(); // Close the file
-	
-//	System.out.println("The new quiz added consists of these questions:");
-//	while (true)
-//	{
-//		System.out.println((((GenericQuestion<? extends Question>) (infile.readObject())).get()));
-//	} 
 }
-//}
+
 	
 }
 	
@@ -183,4 +193,3 @@ public static void addQuiz()
 	
 }
 }
-

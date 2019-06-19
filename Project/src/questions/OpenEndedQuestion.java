@@ -61,4 +61,3 @@ public class OpenEndedQuestion extends Question<String>
 		return summary += question + "\nOpen-Ended Question\n" + "Your answer: " + userChoice + "\n" + getScore(userChoice) + "\n";
 	}
 }
-

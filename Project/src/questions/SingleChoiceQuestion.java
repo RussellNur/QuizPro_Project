@@ -7,17 +7,19 @@ public class SingleChoiceQuestion extends Question<Number>
 {
 	private String question;
 	private String answer;
+	private String options;
 
 	/*
 	 * Constructor: question and answer are passed as arguments
 	 */
-	public SingleChoiceQuestion(String q, String ans)
+	public SingleChoiceQuestion(String q, String opt, String ans)
 	{
 		question = q;
 		answer = ans;
+		options = opt;
 	}
 	public String get() {
-		return("\nQuestion:\n" + question + "\nAnswer:\n" + answer);
+		return("\nQuestion:\n" + question + "\noptions\n" + options +  "\nAnswer:\n" + answer);
 	}
 	/*
 	 * Method askQuestion overrides the abstract method in Question class.
@@ -25,7 +27,7 @@ public class SingleChoiceQuestion extends Question<Number>
 	 */
 	public void askQuestion()
 	{
-		System.out.println(question + "\nChoose only one (!) option. Your answer: ");
+		System.out.println(question + options + "\nChoose only one (!) option. Your answer: ");
 	}
 	
 	/*
@@ -56,7 +58,7 @@ public class SingleChoiceQuestion extends Question<Number>
 	public String getSummary(String userChoice)
 	{
 		String summary = "";
-		return summary += question + "\nSingle Choice Question\n" + "Correct answer: " + answer + ". Your answer: " + userChoice + "\n" + getScore(userChoice) + "/1 points earned.\n";
+		return summary += question + options + "\nSingle Choice Question\n" + "Correct answer: " + answer + ". Your answer: " + userChoice + "\n" + getScore(userChoice) + "/1 points earned.\n";
 	}
 	
 }
